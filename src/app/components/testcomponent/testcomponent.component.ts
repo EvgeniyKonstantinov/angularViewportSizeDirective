@@ -8,8 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TestcomponentComponent implements OnInit {
 
   @Input() value: any;
+  viewsize;
 
-  constructor() { }
+  constructor() { 
+    this.viewsize = window.innerWidth;
+  }
 
   ngOnInit() {
   }
