@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input, TemplateRef, ViewContainerRef, Renderer } from '@angular/core';
+import { Directive, HostListener, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AppSetings } from '../config';
 import { IConfig } from '../config.interface';
 
@@ -8,39 +8,35 @@ import { IConfig } from '../config.interface';
 export class IfViewportSizeDirective {
 
   IConfig: IConfig;
-  screenwidth: number;
+  viewportWidth: number;
   directiveparam: string;
 
   constructor(private templateRef: TemplateRef<any>, 
               private viewContainer: ViewContainerRef,
-              private appSetings: AppSetings,
-              private renderer: Renderer) { 
+              private appSetings: AppSetings) { 
     this.IConfig = appSetings.IConfig;
-    this.screenwidth = window.innerWidth;
+    this.viewportWidth = window.innerWidth;
 
   }
 
   @Input() set IfViewportSize(param: string){
     this.directiveparam = param;
     this.showComponent();
-  
   }
 
   showComponent() {
-    if(this.screenwidth < this.IConfig[this.directiveparam]){
-      const el = this.viewContainer.createEmbeddedView(this.templateRef).rootNodes[0];
-      this.renderer.listen(el, 'click', this.onResize);
+
+    if( this.directiveparam === 'small' && this.viewportWidth < this.IConfig.medium){
+      this.viewContainer.createEmbeddedView(this.templateRef);
+    } else if( this.directiveparam === 'medium' &&  this.IConfig.medium <= this.viewportWidth && this.viewportWidth < this.IConfig.large){
+      this.viewContainer.createEmbeddedView(this.templateRef);
+    } else if( this.directiveparam === 'large' && this.viewportWidth >= this.IConfig.large){
+      this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
       this.viewContainer.clear();
     }
+
   }
 
-  onResize(event: any) {
-    console.log('sda');
-    // this.screenwidth = event.target.innerWidth;
-    // this.showComponent();
-  }
-
-  
  
 }
