@@ -3,14 +3,20 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { IfViewportSizeDirective } from './directives/if-viewport-size.directive';
+import { TestcomponentComponent } from './components/testcomponent/testcomponent.component';
+import { AppSetings } from './config';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    IfViewportSizeDirective,
+    TestcomponentComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppSetings
   ],
   providers: [],
   bootstrap: [AppComponent]
