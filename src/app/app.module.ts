@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { IfViewportSizeDirective } from './directives/if-viewport-size.directive';
 import { TestcomponentComponent } from './components/testcomponent/testcomponent.component';
 import { AppSetings } from './config';
+import { ScreenwidthService } from './services/screenwidth.service';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { AppSetings } from './config';
     BrowserModule,
     AppSetings
   ],
-  providers: [],
+  providers: [ScreenwidthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
